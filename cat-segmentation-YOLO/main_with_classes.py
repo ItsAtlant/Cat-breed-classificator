@@ -1,10 +1,14 @@
 from ultralytics import YOLO
 import os
+import requests
 
 
+#controlla se il modello esiste, in caso contrario lo scarica
 if not os.path.isfile("YOLOv8x.pt"):
-    #TODO fare il download leggendo il file yolodownload.txt
-    ...
+    URL = "https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8x.pt"
+    response = requests.get(URL)
+    open("YOLOv8x.pt", "wb").write(response.content)
+
 
 # Load a model
 model = YOLO("YOLOv8x.pt")  # load a pretrained model (recommended for training)
@@ -20,7 +24,7 @@ for (root, dirs, files) in os.walk('fotogatti', topdown=True):
             #TODO controllare se la riga che si mette gia` esiste per evitare di riscrivere
             f.write(str(count)+","+nome_cartella+"\n")
 
-        print(nome_cartella)
+
         for immagine in files:
             if not os.path.isdir(f"{root}_coordinate"):
                 os.mkdir(f"{root}_coordinate")
@@ -35,5 +39,4 @@ for (root, dirs, files) in os.walk('fotogatti', topdown=True):
                     coordinate = coordinate.replace("tensor(", "").replace(")", "")
                     coordinate = coordinate.strip('[]')
                     f.write(str(count)+","+coordinate)
-                    print("CIAOOO")
                     count = +1
