@@ -25,18 +25,20 @@ for (root, dirs, files) in os.walk('fotogatti', topdown=True):
             f.write(str(count)+","+nome_cartella+"\n")
 
 
-        for immagine in files:
+        for immagine_name in files:
+            #controllo se non ho gia` una cartella con le coordinate, nel caso la creo
             if not os.path.isdir(f"{root}_coordinate"):
                 os.mkdir(f"{root}_coordinate")
 
-            results = model(source=f"{root}/{immagine}", show=False,
+            #faccio la prediction usando il modello
+            results = model(source=f"{root}/{immagine_name}", show=False,
                             conf=0.6, classes=15)  # predict on an image
 
             for result in results:
-                immagine = immagine.split(".")[0]
-                with open(f"{root}_coordinate/{immagine}.txt", "w") as f:
-                    coordinate = (str(result.boxes.xywh[0]))
+                immagine_name = immagine_name.split(".")[0] #prendo il nome dell'immagine_name
+                with open(f"{root}_coordinate/{immagine_name}.txt", "w") as f: #apro il file di testo per le coodinate
+                    coordinate = (str(result.boxes.xywh[0]))  #prendo le informazione , x,y,w,h
                     coordinate = coordinate.replace("tensor(", "").replace(")", "")
-                    coordinate = coordinate.strip('[]')
+                    coordinate = coordinate.strip('[]') #lavoro la stringa
                     f.write(str(count)+","+coordinate)
                     count = +1
