@@ -9,12 +9,18 @@ if not os.path.isfile("YOLOv8x.pt"):
 # Load a model
 model = YOLO("YOLOv8x.pt")  # load a pretrained model (recommended for training)
 
-
+count = 0
 #TODO mettere i commenti e se si riesce pulire un po il codice
 for (root, dirs, files) in os.walk('fotogatti', topdown=True):
 
     root_controllo = root.split("_")[-1]
-    if root_controllo != "coordinate":
+    if root_controllo != "coordinate" and root_controllo != "fotogatti":
+        nome_cartella = root_controllo.split("\\")[-1]
+        with open("Tabella_razza_nome.txt","a") as f:
+            #TODO controllare se la riga che si mette gia` esiste per evitare di riscrivere
+            f.write(str(count)+","+nome_cartella+"\n")
+
+        print(nome_cartella)
         for immagine in files:
             if not os.path.isdir(f"{root}_coordinate"):
                 os.mkdir(f"{root}_coordinate")
@@ -28,4 +34,6 @@ for (root, dirs, files) in os.walk('fotogatti', topdown=True):
                     coordinate = (str(result.boxes.xywh[0]))
                     coordinate = coordinate.replace("tensor(", "").replace(")", "")
                     coordinate = coordinate.strip('[]')
-                    f.write(coordinate)
+                    f.write(str(count)+","+coordinate)
+                    print("CIAOOO")
+                    count = +1
