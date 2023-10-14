@@ -1,0 +1,35 @@
+0, Abyssinian
+1, American Bobtail
+2, American Curl
+3, American Shorthair
+4, Balinese
+5, Bengal
+6, Birman
+7, Bombay
+8, British Shorthair
+9, Burmese
+10, Calico
+11, Chartreux
+12, Cornish Rex
+13, Domestic Long Hair
+14, Domestic Medium Hair
+15, Domestic Short Hair
+16, Himalayan
+17, Japanese Bobtail
+18, Korat
+19, Maine Coon
+20, Nebelung
+21, Norwegian Forest Cat
+22, Ocicat
+23, Persian
+24, Ragamuffin
+25, Ragdoll
+26, Russian Blue
+27, Scottish Fold
+28, Siamese
+29, Siberian
+30, Snowshoe
+31, Sphynx
+32, Tonkinese
+33, Turkish Angora
+34, Turkish Van
